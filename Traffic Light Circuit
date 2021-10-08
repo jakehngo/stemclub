@@ -1,0 +1,38 @@
+//initialize the state of the sensor to be off
+int sensorState = 0;
+
+void setup()
+{
+  //takes in PIR as input
+  pinMode(13, INPUT);
+  
+  //recognizes leds as output
+  pinMode(8, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(2, OUTPUT);
+}
+
+void loop()
+{
+  sensorState = digitalRead(13); // reads sensor input
+	
+  if(sensorState == HIGH)
+  {
+    //if motion detected, light will turn green, yellow, then red
+    delay(2000); // waits 2 seconds before turning green
+    digitalWrite(8, LOW);
+    digitalWrite(2, HIGH);
+    delay(5000); // stays green for 5 seconds
+    
+    digitalWrite(2, LOW);
+    digitalWrite(3, HIGH);
+    delay(3000); // stays green for 3 seconds
+  }
+  else
+  {    
+    //red light
+    digitalWrite(3, LOW);
+    digitalWrite(8, HIGH);
+  }
+  
+}
